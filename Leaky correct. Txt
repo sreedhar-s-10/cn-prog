@@ -1,0 +1,89 @@
+import java.util.Scanner;
+
+public class prog7 
+
+{
+
+	public static void main(String[] args) 
+
+	{
+
+		Scanner sc = new Scanner(System.in);
+
+		System.out.println("Enter the Bucket size");
+
+		int b_size;
+
+		b_size = sc.nextInt();
+
+		System.out.println("Enter the output rate");
+
+		int op_rate;
+
+		op_rate = sc.nextInt(); 
+
+		System.out.println("Enter the no of packets");
+
+		int n;
+
+		n = sc.nextInt();
+
+		int[] packet = new int[n];
+
+
+
+		System.out.println("Enter the packet");
+
+		for(int i=0; i<n; i++)
+
+			packet[i] = sc.nextInt();
+
+		
+
+		System.out.println("Recv_pac_size\t Buc_content\t Acc/Rej\t Remaining_buc_content");
+
+		System.out.println("-----------------------------------------------------------");
+
+		
+
+		int Recv_pack_size, Buc_content = 0, Remaining_buc_content=0;
+
+		for(int i=0; i<n; i++) 
+
+		{
+
+			Recv_pack_size = packet[i];
+
+			Buc_content = Recv_pack_size + Remaining_buc_content;
+
+			if(Buc_content <= b_size) 
+
+			{
+
+				Remaining_buc_content = Buc_content - op_rate;
+
+				if(Remaining_buc_content<0) 
+
+				{
+
+					Remaining_buc_content=0;
+
+				}
+
+				System.out.println(Recv_pack_size +"\t\t"+ Buc_content +"\t\t Accepted \t\t"+ Remaining_buc_content);
+
+			}
+
+			else 
+
+			{
+
+				System.out.println(Recv_pack_size +"\t\t"+ Buc_content +"\t\t Rejected \t\t"+ Remaining_buc_content);
+
+			}
+
+		}
+
+	}
+
+}
